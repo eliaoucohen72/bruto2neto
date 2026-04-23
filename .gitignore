@@ -1,8 +1,3 @@
-.env
 node_modules/
 dist/
 .claude/
-docs/
-_bmad/
-_bmad-output/
-backend/uploads/
