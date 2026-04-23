@@ -1,4 +1,3 @@
-import { useTranslation } from 'react-i18next'
 import { Card, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -24,20 +23,13 @@ interface SalaryFormProps {
 }
 
 /** Renders an auto-fill badge next to a label when the field was populated from a PDF */
-function AutoBadge({
-  show,
-  label,
-}: {
-  show: boolean
-  label: string
-}) {
-  const { t } = useTranslation()
+function AutoBadge({ show, label }: { show: boolean; label: string }) {
   return (
     <span className="flex items-center gap-2">
       {label}
       {show && (
         <Badge variant="secondary" className="text-xs">
-          {t('upload.badge')}
+          Depuis la fiche
         </Badge>
       )}
     </span>
@@ -56,8 +48,6 @@ export default function SalaryForm({
   onCalculate,
   isCalculating,
 }: SalaryFormProps) {
-  const { t } = useTranslation()
-
   return (
     <Card>
       <CardContent className="pt-6 space-y-6">
@@ -67,7 +57,7 @@ export default function SalaryForm({
           {/* Gross salary */}
           <div className="space-y-2">
             <Label htmlFor="gross">
-              <AutoBadge show={autoFilledKeys.has('gross')} label={t('form.gross')} />
+              <AutoBadge show={autoFilledKeys.has('gross')} label="Salaire mensuel brut (ILS)" />
             </Label>
             <Input
               id="gross"
@@ -82,10 +72,7 @@ export default function SalaryForm({
           {/* Marital status */}
           <div className="space-y-2">
             <Label>
-              <AutoBadge
-                show={autoFilledKeys.has('maritalStatus')}
-                label={t('form.maritalStatus')}
-              />
+              <AutoBadge show={autoFilledKeys.has('maritalStatus')} label="Statut matrimonial" />
             </Label>
             <Select
               value={values.maritalStatus}
@@ -95,10 +82,10 @@ export default function SalaryForm({
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="single">{t('form.maritalStatus_single')}</SelectItem>
-                <SelectItem value="married">{t('form.maritalStatus_married')}</SelectItem>
-                <SelectItem value="divorced">{t('form.maritalStatus_divorced')}</SelectItem>
-                <SelectItem value="widowed">{t('form.maritalStatus_widowed')}</SelectItem>
+                <SelectItem value="single">Célibataire</SelectItem>
+                <SelectItem value="married">Marié(e)</SelectItem>
+                <SelectItem value="divorced">Divorcé(e)</SelectItem>
+                <SelectItem value="widowed">Veuf / Veuve</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -106,7 +93,7 @@ export default function SalaryForm({
           {/* Age */}
           <div className="space-y-2">
             <Label htmlFor="age">
-              <AutoBadge show={autoFilledKeys.has('age')} label={t('form.age')} />
+              <AutoBadge show={autoFilledKeys.has('age')} label="Âge" />
             </Label>
             <Input
               id="age"
@@ -122,7 +109,7 @@ export default function SalaryForm({
           {/* Children under 18 */}
           <div className="space-y-2">
             <Label htmlFor="children">
-              <AutoBadge show={autoFilledKeys.has('children')} label={t('form.children')} />
+              <AutoBadge show={autoFilledKeys.has('children')} label="Enfants de moins de 18 ans" />
             </Label>
             <Input
               id="children"
@@ -137,10 +124,7 @@ export default function SalaryForm({
           {/* Children under 5 */}
           <div className="space-y-2">
             <Label htmlFor="childrenUnder5">
-              <AutoBadge
-                show={autoFilledKeys.has('childrenUnder5')}
-                label={t('form.childrenUnder5')}
-              />
+              <AutoBadge show={autoFilledKeys.has('childrenUnder5')} label="Dont enfants de moins de 5 ans" />
             </Label>
             <Input
               id="childrenUnder5"
@@ -156,10 +140,7 @@ export default function SalaryForm({
           {/* Pension rate */}
           <div className="space-y-2">
             <Label htmlFor="pensionRate">
-              <AutoBadge
-                show={autoFilledKeys.has('pensionRate')}
-                label={t('form.pensionRate')}
-              />
+              <AutoBadge show={autoFilledKeys.has('pensionRate')} label="Taux de pension (%)" />
             </Label>
             <Input
               id="pensionRate"
@@ -188,13 +169,13 @@ export default function SalaryForm({
                 className={autoRing(autoFilledKeys.has('isOleh'))}
               />
               <Label htmlFor="isOleh" className="cursor-pointer">
-                <AutoBadge show={autoFilledKeys.has('isOleh')} label={t('form.isOleh')} />
+                <AutoBadge show={autoFilledKeys.has('isOleh')} label="Oleh hadash" />
               </Label>
             </div>
 
             {values.isOleh && (
               <div className="ms-7 space-y-2">
-                <Label htmlFor="olehYears">{t('form.olehYears')}</Label>
+                <Label htmlFor="olehYears">Années depuis l'aliyah</Label>
                 <Input
                   id="olehYears"
                   type="number"
@@ -217,10 +198,7 @@ export default function SalaryForm({
               className={autoRing(autoFilledKeys.has('hasDisability'))}
             />
             <Label htmlFor="hasDisability" className="cursor-pointer">
-              <AutoBadge
-                show={autoFilledKeys.has('hasDisability')}
-                label={t('form.hasDisability')}
-              />
+              <AutoBadge show={autoFilledKeys.has('hasDisability')} label="Handicap reconnu (100%)" />
             </Label>
           </div>
         </div>
@@ -233,7 +211,7 @@ export default function SalaryForm({
           onClick={onCalculate}
           disabled={values.gross <= 0 || isCalculating}
         >
-          {isCalculating ? t('form.calculating') : t('form.calculate')}
+          {isCalculating ? 'Calcul en cours...' : 'Calculer le salaire net'}
         </Button>
       </CardContent>
     </Card>

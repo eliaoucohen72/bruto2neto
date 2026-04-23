@@ -1,6 +1,4 @@
 import { useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import LanguageSwitcher from '@/components/LanguageSwitcher'
 import PdfUpload from '@/components/PdfUpload'
 import SalaryForm from '@/components/SalaryForm'
 import SalaryResult from '@/components/SalaryResult'
@@ -20,7 +18,6 @@ const DEFAULT_VALUES: SalaryInputs = {
 }
 
 export default function App() {
-  const { t } = useTranslation()
   const [formValues, setFormValues] = useState<SalaryInputs>(DEFAULT_VALUES)
   const [autoFilledKeys, setAutoFilledKeys] = useState<Set<keyof SalaryInputs>>(new Set())
   const [result, setResult] = useState<SalaryResultType | null>(null)
@@ -60,10 +57,9 @@ export default function App() {
         {/* Header */}
         <header className="flex items-start justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-bold text-foreground">{t('app.title')}</h1>
-            <p className="text-sm text-muted-foreground mt-1">{t('app.subtitle')}</p>
+            <h1 className="text-2xl font-bold text-foreground">Calculatrice de salaire net</h1>
+            <p className="text-sm text-muted-foreground mt-1">Israël — Année fiscale 2026</p>
           </div>
-          <LanguageSwitcher />
         </header>
 
         {/* PDF upload */}

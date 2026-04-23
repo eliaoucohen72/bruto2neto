@@ -1,4 +1,3 @@
-import { useTranslation } from 'react-i18next'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 import type { SalaryResult } from '@/lib/salaryCalculator'
@@ -15,7 +14,7 @@ function formatILS(amount: number): string {
   }) + ' ₪'
 }
 
-/** A single result row: label on one side, value on the other, RTL-aware */
+/** A single result row: label on one side, value on the other */
 function ResultRow({
   label,
   value,
@@ -27,45 +26,43 @@ function ResultRow({
 }) {
   return (
     <div className={`flex justify-between items-center py-1.5 ${className}`}>
-      <span className="text-sm text-muted-foreground rtl:text-right">{label}</span>
-      <span className="text-sm font-medium tabular-nums rtl:text-left">{value}</span>
+      <span className="text-sm text-muted-foreground">{label}</span>
+      <span className="text-sm font-medium tabular-nums">{value}</span>
     </div>
   )
 }
 
 export default function SalaryResult({ result }: SalaryResultProps) {
-  const { t } = useTranslation()
-
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-xl">{t('result.title')}</CardTitle>
+        <CardTitle className="text-xl">Détail du calcul</CardTitle>
       </CardHeader>
       <CardContent className="space-y-1">
         {/* Gross + pension */}
-        <ResultRow label={t('result.gross')} value={formatILS(result.gross)} />
+        <ResultRow label="Salaire brut" value={formatILS(result.gross)} />
         <ResultRow
-          label={t('result.pensionDeduction')}
+          label="Déduction pension (salarié)"
           value={`− ${formatILS(result.pensionDeduction)}`}
           className="text-muted-foreground"
         />
-        <ResultRow label={t('result.taxableIncome')} value={formatILS(result.taxableIncome)} />
+        <ResultRow label="Revenu imposable" value={formatILS(result.taxableIncome)} />
 
         <Separator className="my-2" />
 
         {/* Income tax */}
         <ResultRow
-          label={t('result.incomeTaxBeforeCredits')}
+          label="Impôt avant points de crédit"
           value={`− ${formatILS(result.incomeTaxBeforeCredits)}`}
           className="text-muted-foreground"
         />
         <ResultRow
-          label={t('result.creditPointsValue')}
+          label="Points de crédit (nekudot zikui)"
           value={`+ ${formatILS(result.creditPointsValue)}`}
           className="text-green-700"
         />
         <ResultRow
-          label={t('result.finalIncomeTax')}
+          label="Impôt final sur le revenu"
           value={`− ${formatILS(result.finalIncomeTax)}`}
         />
 
@@ -73,12 +70,12 @@ export default function SalaryResult({ result }: SalaryResultProps) {
 
         {/* Social contributions */}
         <ResultRow
-          label={t('result.bituachLeumi')}
+          label="Bituach Leumi"
           value={`− ${formatILS(result.bituachLeumi)}`}
           className="text-muted-foreground"
         />
         <ResultRow
-          label={t('result.masBriut')}
+          label="Mas Briut"
           value={`− ${formatILS(result.masBriut)}`}
           className="text-muted-foreground"
         />
@@ -87,14 +84,14 @@ export default function SalaryResult({ result }: SalaryResultProps) {
 
         {/* Totals */}
         <ResultRow
-          label={t('result.totalDeductions')}
+          label="Total des déductions"
           value={`− ${formatILS(result.totalDeductions)}`}
           className="font-bold text-red-600 [&_span]:text-red-600 [&_span]:font-bold"
         />
 
         {/* Net salary — most prominent element */}
         <div className="flex justify-between items-center py-3 mt-2 rounded-lg bg-green-50 px-3">
-          <span className="text-base font-bold text-green-800">{t('result.netSalary')}</span>
+          <span className="text-base font-bold text-green-800">Salaire net</span>
           <span className="text-xl font-bold text-green-700 tabular-nums">
             {formatILS(result.netSalary)}
           </span>
@@ -102,7 +99,7 @@ export default function SalaryResult({ result }: SalaryResultProps) {
 
         {/* Effective tax rate */}
         <ResultRow
-          label={t('result.effectiveTaxRate')}
+          label="Taux d'imposition effectif"
           value={`${result.effectiveTaxRate.toFixed(2)} %`}
           className="text-muted-foreground pt-2"
         />

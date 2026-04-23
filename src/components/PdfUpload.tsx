@@ -1,5 +1,4 @@
 import { useRef, useState } from 'react'
-import { useTranslation } from 'react-i18next'
 import { Upload, X, FileText, Loader2 } from 'lucide-react'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Badge } from '@/components/ui/badge'
@@ -16,7 +15,6 @@ interface PdfUploadProps {
 }
 
 export default function PdfUpload({ onParsed, onClear }: PdfUploadProps) {
-  const { t } = useTranslation()
   const inputRef = useRef<HTMLInputElement>(null)
   const [state, setState] = useState<UploadState>('idle')
   const [fileName, setFileName] = useState<string | null>(null)
@@ -75,7 +73,7 @@ export default function PdfUpload({ onParsed, onClear }: PdfUploadProps) {
 
   return (
     <div className="space-y-3">
-      <p className="text-sm font-medium text-foreground">{t('upload.title')}</p>
+      <p className="text-sm font-medium text-foreground">Fiche de paie (optionnel)</p>
 
       {/* Drop zone */}
       <div
@@ -103,7 +101,7 @@ export default function PdfUpload({ onParsed, onClear }: PdfUploadProps) {
         {state === 'loading' ? (
           <>
             <Loader2 className="h-8 w-8 text-primary animate-spin" />
-            <p className="text-sm text-muted-foreground">{t('upload.analyzing')}</p>
+            <p className="text-sm text-muted-foreground">Analyse en cours...</p>
           </>
         ) : state === 'success' && fileName ? (
           <>
@@ -113,7 +111,7 @@ export default function PdfUpload({ onParsed, onClear }: PdfUploadProps) {
         ) : (
           <>
             <Upload className="h-8 w-8 text-muted-foreground" />
-            <p className="text-sm text-muted-foreground">{t('upload.instructions')}</p>
+            <p className="text-sm text-muted-foreground">Glissez-déposez votre fiche de paie PDF ou cliquez pour parcourir</p>
           </>
         )}
       </div>
@@ -122,9 +120,9 @@ export default function PdfUpload({ onParsed, onClear }: PdfUploadProps) {
       {state === 'success' && (
         <Alert variant="success">
           <AlertDescription className="flex items-center justify-between gap-2">
-            <span>{t('upload.success', { count: detectedCount })}</span>
+            <span>{detectedCount} champ(s) détecté(s) depuis votre fiche de paie</span>
             <Badge variant="secondary" className="shrink-0">
-              {t('upload.badge')}
+              Depuis la fiche
             </Badge>
           </AlertDescription>
         </Alert>
@@ -132,7 +130,7 @@ export default function PdfUpload({ onParsed, onClear }: PdfUploadProps) {
 
       {state === 'error' && (
         <Alert variant="destructive">
-          <AlertDescription>{t('upload.error')}</AlertDescription>
+          <AlertDescription>Impossible d'analyser ce fichier. Vérifiez qu'il s'agit bien d'une fiche de paie.</AlertDescription>
         </Alert>
       )}
 
@@ -140,7 +138,7 @@ export default function PdfUpload({ onParsed, onClear }: PdfUploadProps) {
       {(state === 'success' || state === 'error') && (
         <Button variant="outline" size="sm" onClick={handleClear} className="gap-2">
           <X className="h-4 w-4" />
-          {t('upload.clear')}
+          Supprimer
         </Button>
       )}
     </div>
