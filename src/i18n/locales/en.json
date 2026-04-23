@@ -1,0 +1,52 @@
+{
+  "app": {
+    "title": "Net Salary Calculator",
+    "subtitle": "Israel — Fiscal Year 2026"
+  },
+  "language": {
+    "label": "Language",
+    "fr": "Français",
+    "en": "English",
+    "he": "עברית"
+  },
+  "upload": {
+    "title": "Payslip (optional)",
+    "instructions": "Drag & drop your PDF payslip here or click to browse",
+    "analyzing": "Analyzing...",
+    "success": "{{count}} field(s) detected from your payslip",
+    "error": "Unable to analyze this file. Please ensure it is a valid payslip.",
+    "clear": "Remove",
+    "badge": "From payslip"
+  },
+  "form": {
+    "gross": "Monthly gross salary (ILS)",
+    "maritalStatus": "Marital status",
+    "maritalStatus_single": "Single",
+    "maritalStatus_married": "Married",
+    "maritalStatus_divorced": "Divorced",
+    "maritalStatus_widowed": "Widowed",
+    "age": "Age",
+    "children": "Children under 18",
+    "childrenUnder5": "Of which under 5 years old",
+    "pensionRate": "Pension rate (%)",
+    "isOleh": "Oleh hadash",
+    "olehYears": "Years since aliyah",
+    "hasDisability": "Recognized disability (100%)",
+    "calculate": "Calculate net salary",
+    "calculating": "Calculating..."
+  },
+  "result": {
+    "title": "Calculation breakdown",
+    "gross": "Gross salary",
+    "pensionDeduction": "Pension deduction (employee)",
+    "taxableIncome": "Taxable income",
+    "incomeTaxBeforeCredits": "Tax before credit points",
+    "creditPointsValue": "Credit points (nekudot zikui)",
+    "finalIncomeTax": "Final income tax",
+    "bituachLeumi": "Bituach Leumi",
+    "masBriut": "Mas Briut",
+    "totalDeductions": "Total deductions",
+    "netSalary": "Net salary",
+    "effectiveTaxRate": "Effective tax rate"
+  }
+}

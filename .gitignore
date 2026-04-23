@@ -1,0 +1,7 @@
+node_modules/
+dist/
+docs/
+_bmad/
+_bmad-output/
+.claude/
+backend/uploads/
